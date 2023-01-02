@@ -3,11 +3,14 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-# Add source to this project's executable.
-add_executable (PoissonDiskSampling "PoissonDiskSampling.cpp" "PoissonDiskSampling.h")
+add_executable(Tests "Test.cpp" "PoissonDiskSampling.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET PoissonDiskSampling PROPERTY CXX_STANDARD 20)
+  set_property(TARGET Tests PROPERTY CXX_STANDARD 20)
 endif()
 
-# TODO: Add tests and install targets if needed.
+target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(Tests)
